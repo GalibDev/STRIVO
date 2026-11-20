@@ -17,7 +17,9 @@ Open http://localhost:3000. For development use `npm run dev`.
 
 ## Features
 
-Overview, dated workout checklists and rest days, editable beginner workout plan, weight history and date-scaled SVG trend chart, seven dated body measurements, goal editing, kg/lb and in/cm conversion, validated JSON import/export, and confirmed reset. The initial 69 kg weight and seven measurements are explicitly labeled demo entries. New check-ins replace entries on the same date. Weight progress works for both gain and loss goals and is clamped to 0–100%.
+Hero-first overview with an in-card weight logger, swipeable daily completion calendar (seven visible dates on desktop and five on mobile), dated workout checklists and rest days, editable beginner workout plan, weight history and date-scaled SVG trend chart, seven dated body measurements, goal editing, kg/lb and in/cm conversion, validated JSON import/export, and confirmed reset. The initial 69 kg weight and seven measurements are explicitly labeled demo entries. New check-ins replace entries on the same date. Weight progress works for both gain and loss goals and is clamped to 0–100%.
+
+Calendar ticks complete that date’s workout plan and sync with workout history; unticking clears that date’s completed exercises. Future dates are visible but cannot be marked complete. Existing saved records and backups remain compatible. The weight chart remains in the Weight section.
 
 The plan is general fitness information. A brief safety reminder is shown in Workouts.
 

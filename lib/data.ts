@@ -16,3 +16,25 @@ export function validate(x: unknown): x is Data {
 }
 export const sorted = <T extends {date:string}>(a:T[]) => [...a].sort((a,b)=>a.date.localeCompare(b.date));
 export function progress(start:number,current:number,goal:number) { return start===goal ? (current===goal?100:0) : Math.max(0,Math.min(100,(current-start)/(goal-start)*100)); }
+
+
+export function isDayComplete(day: Day | undefined, exercises: Exercise[]): boolean {
+  return !!day && !day.rest && exercises.length > 0 && exercises.every(exercise => day.completed.includes(exercise.id));
+}
+
+// Local noon avoids date shifts around daylight-saving changes.
+export function calendarDates(anchor: string): string[] {
+  const date = new Date(anchor + 'T12:00:00');
+  return Array.from({ length: 365 }, (_, index) => {
+    const value = new Date(date);
+    value.setDate(value.getDate() + index - 180);
+    return `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`;
+  });
+}
+
+export function toggleDay(days: Day[], exercises: Exercise[], date: string): Day[] {
+  if (!validDate(date) || exercises.length === 0) return days;
+  const existing = days.find(day => day.date === date);
+  const completed = isDayComplete(existing, exercises) ? [] : exercises.map(exercise => exercise.id);
+  return [...days.filter(day => day.date !== date), { date, rest: false, completed }];
+}
